@@ -1,0 +1,56 @@
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="home-tab" data-toggle="tab" role="tab" aria-controls="home" aria-selected="true">Home</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="profile-tab" data-toggle="tab" role="tab" aria-controls="profile" aria-selected="false">このサイトについて</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="contact-tab" data-toggle="tab" role="tab" aria-controls="contact" aria-selected="false">ログイン</a>
+  </li>
+</ul>
+<div class="col-md-1 col-sm-1">
+
+  <% @beans.order("id").each do |b|%>
+
+  <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target=".bd-example-modal-lg_<%=b.id%>" style="width: 250px;　height: 21px;"><h5><%=b.name%></h5>
+　</button>
+  　<div class="modal fade bd-example-modal-lg_<%=b.id%>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  　  <div class="modal-dialog modal-lg">
+    　  <div class="modal-content">
+          <h4> <%=b.name%>   (<%=b.taste%>)　産地: <%=b.place%></h4>
+          <h4> 特徴</h4>
+          <p> <%=b.feature%></p>
+          <h4> 歴史・地理</h4>
+          <p> <%=b.geography_history%></p>
+
+        <div class="row">
+        <div class="col-md-2 col-sm-2">
+          <p>　酸味　<%=b.acidity%></p>
+          <p>　甘味　<%=b.sweetness%></p>
+          <p>　苦味　<%=b.bitter%></p>
+          <p>　コク　<%=b.richness%></p>
+          <p>　香り　<%=b.aroma%></p>
+        </div>
+
+         <!-- TODO -->
+          <%@chart = LazyHighCharts::HighChart.new('graph') do |f|%>
+          <%f.title(text: "豆のバランスを見てみよう！")%>
+          <%f.xAxis(categories: ["酸味", "甘味", "苦味", "コク", "香り"])%>
+          <%f.series(name: "豆のバランス", yAxis: 0, data: [b.acidity, b.sweetness, b.bitter, b.richness, b.aroma])%>
+          <% f.yAxis [title: {text: "豆のバランス"},lineWidth:0,min:0,max:5]%>
+          <%f.chart(polar: true,type:'line')%>
+          <%end%>
+          <div class="col-md-1 col-sm-1">
+          <%= high_chart("radar", @chart) %>
+          </div>
+          </div>
+
+
+
+
+      　</div>
+  　  </div>
+　  </div>
+  <%end%>
+</div>
