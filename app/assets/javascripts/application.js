@@ -11,11 +11,10 @@
 // about supported directives.
 //
 //= require jquery
-
+//= require jquery3
 //= require rails-ujs
 //= require_tree .
 //= require turbolinks
-//= require jquery3
 //= require bootstrap-sprockets
 //= require highcharts/highcharts
 //= require highcharts/highcharts-more
