@@ -1,0 +1,41 @@
+<p>コーヒー豆を選んでこだわりのブレンドを選ぼう！</p>
+<div>
+
+  <div class="form-check">
+    <label class="form-check-label">
+      <input type="radio" value="1">チェック1<br>
+    </label>
+  </div>
+  <div class="form-check">
+    <label class="form-check-label">
+      <input type="radio" value="2">チェック1<br>
+    </label>
+  </div>
+  <div class="form-check">
+    <label class="form-check-label">
+      <input type="radio" value="3">チェック1<br>
+    </label>
+  </div>
+  <div class="form-check">
+    <label class="form-check-label">
+      <input type="radio" value="4">チェック1<br>
+    </label>
+  </div>
+  <div class="form-check">
+    <label class="form-check-label">
+      <input type="radio" value="5">チェック1<br>
+    </label>
+  </div>
+
+</div>
+<script>
+  // チェックボックスを5個までに制限
+  jQuery('input[type=radio]').click(function(){
+    var checked = jQuery('input[type=radio]:checked').length;
+    if (checked > 3) {
+      jQuery(this).prop("checked",false);
+      alert('選択は３つまでです。');
+    }
+  });
+</script>
+</div>

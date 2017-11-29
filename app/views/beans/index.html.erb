@@ -1,48 +1,67 @@
 <p class="flash"><%= notice %><%= alert %></p>
+<div class="row">
 <div class="col-md-1 col-sm-1">
 
-  <% @beans.order("id").each do |b|%>
+  <% @beans.each do |b|%>
 
-  <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target=".bd-example-modal-lg_<%=b.id%>" style="width: 230px;"><h6><%=b.name%></h6>
+  <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bd-example-modal-lg_<%=b[:id]%>" style="width: 230px;"><h6><%=b[:name]%></h6>
 　</button>
-  　<div class="modal fade bd-example-modal-lg_<%=b.id%>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+
+  　<div class="modal fade bd-example-modal-lg_<%=b[:id]%>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   　  <div class="modal-dialog modal-lg">
     　  <div class="modal-content">
+
           <div class="card bg-light mb-3" style="max-width:100%;">
-          <div class="card-header"><%=b.name%>   (<%=b.taste%>)　産地: <%=b.place%></div>
-          <div class="card-body">
-          <h4 class="card-title">特徴</h4>
-          <p class="card-text"><%=b.feature%></p>
-          <h4 class="card-title"> 歴史・地理</h4>
-          <p class="card-text"><%=b.geography_history%></p>
+            <div class="card-header"><%=b[:name]%>   (<%=b[:taste]%>)　産地: <%=b[:place]%></div>
+            <div class="card-body">
+            <h4 class="card-title">特徴</h4>
+            <p class="card-text"><%=b[:feature]%></p>
+            <h4 class="card-title"> 歴史・地理</h4>
+            <p class="card-text"><%=b[:geography_history]%></p>
+            </div>
           </div>
+
+          <div class="col-md-5 col-sm-5">
+            <h4>　酸味　: <%=star(b[:acidity])%> </h4>
+            <h4>　甘味　: <%=star(b[:sweetness])%></h4>
+            <h4>　苦味　: <%=star(b[:bitter])%></h4>
+            <h4>　コク　: <%=star(b[:richness])%></h4>
+            <h4>　香り　: <%=star(b[:aroma])%></h4>
           </div>
-        <div class="col-md-2 col-sm-2">
-          <p>　酸味　<%=b.acidity%></p>
-          <p>　甘味　<%=b.sweetness%></p>
-          <p>　苦味　<%=b.bitter%></p>
-          <p>　コク　<%=b.richness%></p>
-          <p>　香り　<%=b.aroma%></p>
+         <!-- <div class="col-md-10 col-sm-10">
+           <%= render "chart", data: b[:lazy_chart_data] %>
+          </div> -->
+
         </div>
-
-         <!-- TODO -->
-          <%@chart = LazyHighCharts::HighChart.new('graph') do |f|%>
-          <%f.title(text: "豆のバランスを見てみよう！")%>
-          <%f.xAxis(categories: ["酸味", "甘味", "苦味", "コク", "香り"])%>
-          <%f.series(name: "豆のバランス", yAxis: 0, data: [b.acidity, b.sweetness, b.bitter, b.richness, b.aroma])%>
-          <% f.yAxis [title: {text: "豆のバランス"},lineWidth:0,min:0,max:5]%>
-          <%f.chart(polar: true,type:'line')%>
-          <%end%>
-          <div class="col-md-1 col-sm-1">
-          <%= high_chart("radar", @chart) %>
-          </div>
-        </div>
-
-
-
-
       　</div>
   　  </div>
-　
   <%end%>
+</div>
+<div class="col-md-8 col-sm-offset-4" style="
+    left: 300px;
+    top: 50px;
+">
+<h3>コーヒー豆を選んでこだわりのブレンドを選ぼう！</h3>
+<br>
+<%# @beans.each do |b|%>
+  <%= form_for @bean, method: :get do |f| %>
+
+  <%= f.collection_check_boxes(:id, Bean.all, :id, :name) do |b| %>
+    <h4><%= b.label { b.check_box + b.text } %></h4>
+    <% end %>
+  <%= f.submit "計算", class: "follow_submit"%>
+<%end%>
+<button type="button" class="btn btn-primary"><%=link_to "やり直す",beans_path %></buton>
+
+<script>
+  // チェックボックスを5個までに制限
+  jQuery('input[type=checkbox]').click(function(){
+    var checked = jQuery('input[type=checkbox]:checked').length;
+    if (checked > 4) {
+      jQuery(this).prop("checked",false);
+      alert('選択は３つまでです。');
+    }
+  });
+</script>
+</div>
 </div>

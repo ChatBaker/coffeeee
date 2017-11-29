@@ -1,1 +1,16 @@
 @import "bootstrap";
+a {
+    color: white;
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+}
+/* form */
+input.follow_submit {
+  background-color: #ffc107;
+  color: white;
+  border-style: none;
+  border-radius: 5px;
+  margin-bottom: 2px;
+
+}

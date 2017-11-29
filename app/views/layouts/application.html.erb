@@ -9,15 +9,16 @@
   </head>
 
   <body>
+
     <nav class="nav">
-    <button type="button" class="btn btn-outline-dark"><%= link_to 'Home', beans_path %></button>
-    <button type="button" class="btn btn-outline-dark">このサイトについて</button>
+    <button type="button" class="btn btn-info"><%= link_to 'Home', beans_path %></button>
+    <button type="button" class="btn btn-info"><%= link_to 'このサイトについて', root_path %></button>
      <% if user_signed_in? %>
-      <button type="button" class="btn btn-outline-dark"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></button>
-      <button type="button" class="btn btn-outline-dark"><%= link_to 'マイページ', edit_user_registration_path %></button>
+      <button type="button" class="btn btn-info"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></button>
+      <button type="button" class="btn btn-info"><%= link_to 'マイページ', edit_user_registration_path %></button>
       <% else %>
-    <button type="button" class="btn btn-outline-dark"><%= link_to 'ログイン', new_user_session_path %></button>
-    <button type="button" class="btn btn-outline-dark"><%= link_to 'サインアップ', new_user_registration_path %></button>
+    <button type="button" class="btn btn-info"><%= link_to 'ログイン', new_user_session_path %></button>
+    <button type="button" class="btn btn-info"><%= link_to 'サインアップ', new_user_registration_path %></button>
 
         <% end %>
     </nav>
