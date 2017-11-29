@@ -20,7 +20,7 @@
 //= require highcharts/highcharts-more
 //= require highcharts/highstock
 
-<script type="text/javascript">
+
 function click_cb(){
     //チェックカウント用変数
     var check_count = 0;
@@ -61,4 +61,3 @@ function click_cb(){
 
     return false;
 }
-</script>
