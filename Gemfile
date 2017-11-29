@@ -60,3 +60,5 @@ gem 'lazy_high_charts'
 gem 'jquery-turbolinks'
 gem 'devise'
 gem 'rails_12factor', group: :production
+gem 'rails_admin'
+gem 'cancan'
