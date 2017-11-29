@@ -8,7 +8,7 @@
 
 
 CSV.foreach("test.csv") do |csv|
-   next if csv[0] == "id"
+  next if csv[0] == "id"
 
-    Bean.create!(name: csv[1], taste: csv[2], acidity: csv[3].to_i, sweetness: csv[4].to_i, bitter: csv[5].to_i, richness: csv[6].to_i, aroma: csv[7].to_i, place: csv[8], feature: csv[9], geography_history: csv[10])
-   end
+  Bean.create!(name: csv[1], taste: csv[2], acidity: csv[3].to_i, sweetness: csv[4].to_i, bitter: csv[5].to_i, richness: csv[6].to_i, aroma: csv[7].to_i, place: csv[8], feature: csv[9], geography_history: csv[10])
+ end
